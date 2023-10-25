@@ -64,7 +64,7 @@ We are seeking an investment of $200,000 to cover startup costs, marketing, and 
 
 Quyen & Calvin's Unique Restaurant is a one-of-a-kind culinary adventure that captivates the senses and creates memorable experiences. We invite you to join us on this journey, investing in a venture that not only brings financial returns but also enriches the local dining scene.
 
-![qtchief](calvinchengyx.github.io/qtchief.jpg)
+![qtchief.jpg](calvinchengyx.github.io/qtchief.jpg)
 
 
 Thank you for considering our business plan. We look forward to discussing the exciting opportunities that await us.
