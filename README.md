@@ -1,4 +1,9 @@
-### Hi there 👋
+### Hi QT, this is a website setup especially for u!  👋
+
+
+It is pretty empty here, but the content can be loaded super swiftly. 
+
+what do you like? 
 
 <!--
 **calvinchengyx/calvinchengyx** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
