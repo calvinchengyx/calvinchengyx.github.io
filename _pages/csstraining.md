@@ -3,7 +3,6 @@ title: "CSS Training Roadmap"
 permalink: /csstraining/
 ---
 
-# CSS Training
 
 This is a self-developed training roadmap for any people who are interested in doing computational social science research. The roadmap is designed to help myself to learn CSS from scratch. With the communication background, I started from a time when there is no such a concept of CSS. I have learned a lot from my friends, colleagues, and the internet. I also made countless mistakes and wasted a significant amount of time along the way. I hope this roadmap can track my progress of doing CSS, and help future people to learn this field more efficiently and effectively, avoiding the mistakes I made. 
 
