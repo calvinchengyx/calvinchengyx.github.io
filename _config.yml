@@ -90,8 +90,8 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/calvinchengyx"
-    - label: "Institution"
-      icon: ""fa-solid fa-building-columns"
+    - label: "University of Oxford"
+      icon: "fas fa-fw fa-university"
       url: "https://www.oii.ox.ac.uk/people/profiles/calvin-cheng/"
 
 defaults:
