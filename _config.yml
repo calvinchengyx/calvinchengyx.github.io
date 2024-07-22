@@ -13,25 +13,25 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: MM
-email:
+title: CALVIN YIXIANG CHENG
+email: calvin.cheng[at]oii.ox.ac.uk
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 twitter_username: username
 github_username: username
-minimal_mistakes_skin: default
-search: true
+minimal_mistakes_skin: contrast
+search: false
 
 # Build settings
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
-permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+permalink: /about/
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
+# timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
   - _pages
@@ -53,63 +53,71 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
-  - jekyll-feed
+  # - jekyll-feed
   - jemoji
   - jekyll-include-cache
 
 author:
-  name   : "First Lastname"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  name   : "Calvin Yixiang Cheng"
+  avatar : "/assets/images/bio-row.jpg"
+  bio    : "\
+  Ph.D. Candidate \ \n
+  Social Data Science Program \ \n 
+  Oxford Internet Institute \ \n
+  University of Oxford \ \n"
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:calvin.cheng@oii.ox.ac.uk"
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   url: "https://"
     - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      icon: "fab fa-fw fa-twitter"
+      url: "https://x.com/owencheng1992/"
+    - label: "Google Scholar"
+      icon: "fab fa-fw fa-google-scholar"
+      url: "https://scholar.google.com/citations?hl=en&user=WRQAMdgAAAAJ"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/calvin-yixiang-cheng-1aab24a0/"
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+    # - label: "Twitter"
+    #   icon: "fab fa-fw fa-twitter-square"
+    #   url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/calvinchengyx"
+    - label: "Institution"
+      icon: "fab fa-fw fa-building-columns"
+      url: "https://www.oii.ox.ac.uk/people/profiles/calvin-cheng/"
 
 defaults:
   # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
+  # - scope:
+  #     path: ""
+  #     type: posts
+  #   values:
+  #     layout: single
+  #     author_profile: true
+  #     read_time: true
+  #     comments: true
+  #     share: true
+  #     related: true
   # _pages
   - scope:
       path: "_pages"
       type: pages
     values:
       layout: single
+      classes: wide
       author_profile: true
 
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
+# category_archive:
+#   type: liquid
+#   path: /categories/
+# tag_archive:
+#   type: liquid
+#   path: /tags/
