@@ -3,7 +3,9 @@ main:
     url: /about/
   - title: "Research Project"
     url: /posts/
-  - title: "CSS Curriculum"
-    url: /categories/
-  - title: "Tags"
+  - title: "Teaching"
     url: /tags/
+  - title: "CSS Training"
+    url: /csstraining/
+  # - title: "CSS Curriculum"
+  #   url: /categories/
