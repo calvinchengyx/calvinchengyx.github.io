@@ -30,3 +30,6 @@
         - i need to use a full new set of java script based github page deployment, as the previous one is jekyll based deployment.
         - followed gemini pro instruction with basically 0 java knowledge, debugged quite a bit, more specifically, copy paste bugs and logs, many times
         - gemini got error that it can not fix to show the website after trying for 40min 
+        - another 20 min to debug and set settings 
+- end time: 17:10, 
+- end result: https://calvinchengyx.github.io/ is live now with the new design and structure. content needs to be updated, but the website is live. 
