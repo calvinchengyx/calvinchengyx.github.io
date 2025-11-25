@@ -16,7 +16,7 @@ import {
   Briefcase,
   GraduationCap,
   Landmark,
-  ExternalLink
+  // ExternalLink removed as it was unused
 } from 'lucide-react';
 
 // --- Types & Interfaces ---
@@ -51,6 +51,14 @@ interface AwardItem {
   title: string;
   organization: string;
   year: string;
+}
+
+// Define the correct types for the Sidebar component's props (FIX TS7031)
+interface SidebarProps {
+    activeTab: string;
+    setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+    isMobileMenuOpen: boolean;
+    setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // --- Mock Data / Real Content ---
@@ -142,7 +150,8 @@ const AWARD_DATA: AwardItem[] = [
 
 // --- Sub-Components ---
 
-const Sidebar = ({ activeTab, setActiveTab, isMobileMenuOpen, setIsMobileMenuOpen }) => {
+// Fixed TS7031 by adding the SidebarProps type
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenuOpen, setIsMobileMenuOpen }) => {
   const navItems = [
     { id: 'home', label: 'Home', icon: <Home size={18} /> },
     { id: 'research', label: 'Research', icon: <BookOpen size={18} /> },
