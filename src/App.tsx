@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown'; // Requires: npm install react-markdown
+// import remarkGfm from 'remark-gfm';      // Uncomment locally for tables/strikethrough: npm install remark-gfm
 import { 
   Github, 
   Linkedin, 
@@ -16,7 +18,9 @@ import {
   Briefcase,
   GraduationCap,
   Landmark,
-  // ExternalLink removed as it was unused
+  PenTool,   // Added for Blog
+  ArrowLeft, // Added for Blog navigation
+  Calendar   // Added for Blog date
 } from 'lucide-react';
 
 // --- Types & Interfaces ---
@@ -36,7 +40,7 @@ interface Publication {
     code?: string;
     video?: string;
   };
-  status?: string; // e.g., "Forthcoming", "Under Review"
+  status?: string; 
 }
 
 interface TeachingItem {
@@ -53,7 +57,15 @@ interface AwardItem {
   year: string;
 }
 
-// Define the correct types for the Sidebar component's props (FIX TS7031)
+// New Interface for Blog Posts
+interface BlogPost {
+  id: string;
+  title: string;
+  date: string;
+  summary: string;
+  filepath: string;
+}
+
 interface SidebarProps {
     activeTab: string;
     setActiveTab: React.Dispatch<React.SetStateAction<string>>;
@@ -63,8 +75,6 @@ interface SidebarProps {
 
 // --- Mock Data / Real Content ---
 
-// *** UPDATE INSTRUCTIONS: NEWS ***
-// Add new items to the top of the array.
 const NEWS_DATA: NewsItem[] = [
   { date: "May 2025", content: "Started new role as Research Assistant at OII tracking LLM influence." },
   { date: "Jan 2025", content: "Appointed Research Lead at the Oxford Computational Political Science Group." },
@@ -73,8 +83,6 @@ const NEWS_DATA: NewsItem[] = [
   { date: "Sep 2024", content: "Graduate Lecturer for Computational Social Science at Brawijaya University." },
 ];
 
-// *** UPDATE INSTRUCTIONS: PUBLICATIONS ***
-// Add new publications here. Use 'links' for URLs. 
 const PUBLICATIONS_DATA: Publication[] = [
   {
     title: "Beyond English: Evaluating Automated Measurement of Moral Framing in Non-English Discourse with a Chinese Case Study",
@@ -114,7 +122,6 @@ const PUBLICATIONS_DATA: Publication[] = [
   },
 ];
 
-// *** UPDATE INSTRUCTIONS: TEACHING ***
 const TEACHING_DATA: TeachingItem[] = [
   {
     course: "Computational Social Science in Political Communication with Python",
@@ -139,7 +146,6 @@ const TEACHING_DATA: TeachingItem[] = [
   }
 ];
 
-// *** UPDATE INSTRUCTIONS: AWARDS ***
 const AWARD_DATA: AwardItem[] = [
   { title: "Great Britain China Educational Trust Student Award (£2,000)", organization: "GB China Educational Trust", year: "2024 - 2025" },
   { title: "Alan Turing Institute & DSO National Laboratories Fund", organization: "Alan Turing Institute", year: "2022 - 2024" },
@@ -150,7 +156,6 @@ const AWARD_DATA: AwardItem[] = [
 
 // --- Sub-Components ---
 
-// Fixed TS7031 by adding the SidebarProps type
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenuOpen, setIsMobileMenuOpen }) => {
   const navItems = [
     { id: 'home', label: 'Home', icon: <Home size={18} /> },
@@ -159,6 +164,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenu
     { id: 'service', label: 'Service', icon: <Briefcase size={18} /> },
     { id: 'award', label: 'Awards', icon: <Award size={18} /> },
     { id: 'resume', label: 'Resume', icon: <FileText size={18} /> },
+    { id: 'blog', label: 'Blog', icon: <PenTool size={18} /> }, // Added Blog Item
+
   ];
 
   return (
@@ -209,49 +216,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenu
           {/* Footer Social Links */}
           <div className="mt-auto pt-6 border-t border-slate-200">
              <div className="flex justify-center space-x-4">
-                {/* Google Scholar Link */}
-                <a 
-                  href="https://scholar.google.com/" // Update with your actual Google Scholar ID
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-slate-500 hover:text-slate-900"
-                  title="Google Scholar"
-                >
-                  <GraduationCap size={20}/>
-                </a>
-                
-                {/* Institution Link */}
-                <a 
-                  href="https://www.oii.ox.ac.uk/people/profiles/calvin-cheng/" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-slate-500 hover:text-slate-900"
-                  title="OII Profile"
-                >
-                  <Landmark size={20}/>
-                </a>
-
-                {/* GitHub */}
-                <a 
-                  href="https://github.com/calvinchengyx" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-slate-500 hover:text-slate-900"
-                  title="GitHub"
-                >
-                  <Github size={20}/>
-                </a>
-                
-                {/* LinkedIn */}
-                <a 
-                  href="#" // Update with real LinkedIn if available
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-slate-500 hover:text-slate-900"
-                  title="LinkedIn"
-                >
-                  <Linkedin size={20}/>
-                </a>
+                <a href="https://scholar.google.com/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="Google Scholar"><GraduationCap size={20}/></a>
+                <a href="https://www.oii.ox.ac.uk/people/profiles/calvin-cheng/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="OII Profile"><Landmark size={20}/></a>
+                <a href="https://github.com/calvinchengyx" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="GitHub"><Github size={20}/></a>
+                <a href="#" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="LinkedIn"><Linkedin size={20}/></a>
              </div>
              <p className="text-xs text-center text-slate-400 mt-4">© 2025 Calvin Cheng</p>
           </div>
@@ -268,16 +236,11 @@ const HomeSection = () => (
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
         {/* Profile Image */}
         <div className="w-48 h-48 bg-slate-200 rounded-full mb-6 overflow-hidden border-4 border-white shadow-lg">
-           {/* UPDATED PHOTO SOURCE:
-              This is pointing to 'calvin_linkedin.jpg'. 
-              Ensure this file is in your 'public' folder when deploying.
-           */}
            <img 
              src="calvin_linkedin.jpg" 
              alt="Calvin Cheng" 
              className="w-full h-full object-cover"
              onError={(e) => {
-               // Fallback to Oxford image if local file is missing in preview
                (e.target as HTMLImageElement).src = "https://www.oii.ox.ac.uk/wp-content/uploads/2021/10/Calvin-Cheng-2021.jpg";
              }}
            />
@@ -336,6 +299,117 @@ const HomeSection = () => (
     </div>
   </div>
 );
+
+// --- NEW COMPONENT: BLOG SECTION ---
+const BlogSection = () => {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [selectedPost, setSelectedPost] = useState<string | null>(null);
+  const [content, setContent] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // 1. Fetch the Index of Posts
+  useEffect(() => {
+    fetch('/blog/index.json')
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to load blog index");
+        return res.json();
+      })
+      .then(data => {
+        setPosts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setError("Could not load blog posts. Please ensure /public/blog/index.json exists.");
+        setLoading(false);
+      });
+  }, []);
+
+  // 2. Fetch specific article content
+  const handleReadPost = (filepath: string) => {
+    setLoading(true);
+    fetch(`/blog/${filepath}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to load post");
+        return res.text();
+      })
+      .then(text => {
+        setContent(text);
+        setSelectedPost(filepath);
+        setLoading(false);
+        window.scrollTo(0, 0); // Scroll to top of page
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  };
+
+  if (loading && posts.length === 0) return <div className="p-10 text-center text-slate-500">Loading articles...</div>;
+
+  // View 1: Single Post Reading Mode
+  if (selectedPost) {
+    return (
+      <div className="max-w-4xl mx-auto animate-fade-in">
+        <button 
+          onClick={() => { setSelectedPost(null); setContent(''); }}
+          className="flex items-center text-sm text-blue-600 hover:text-blue-800 mb-6 transition-colors font-medium"
+        >
+          <ArrowLeft size={16} className="mr-2" /> Back to Articles
+        </button>
+        
+        {loading ? (
+           <div className="p-10 text-center text-slate-500">Loading post content...</div>
+        ) : (
+          <div className="bg-white p-8 md:p-12 rounded-2xl border border-slate-200 shadow-sm">
+             <article className="prose prose-slate max-w-none prose-headings:font-bold prose-h1:text-3xl prose-a:text-blue-600 prose-code:text-blue-600 prose-pre:bg-slate-100 prose-pre:text-slate-800">
+               {/* Use ReactMarkdown to render the content */}
+               {/* Locally: you can add remarkPlugins={[remarkGfm]} to ReactMarkdown for tables support */}
+               <ReactMarkdown>{content}</ReactMarkdown>
+             </article>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // View 2: List of Posts
+  return (
+    <div className="max-w-4xl mx-auto animate-fade-in">
+      <h2 className="text-3xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">Blog & Insights</h2>
+      
+      {error && (
+        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6 border border-red-200">
+          {error}
+        </div>
+      )}
+
+      <div className="grid gap-6">
+        {posts.map((post) => (
+          <div 
+            key={post.id} 
+            className="group bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer"
+            onClick={() => handleReadPost(post.filepath)}
+          >
+            <div className="flex justify-between items-start mb-2">
+              <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                {post.title}
+              </h3>
+              <span className="flex items-center text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                <Calendar size={12} className="mr-1"/> {post.date}
+              </span>
+            </div>
+            <p className="text-slate-600 leading-relaxed mb-4">{post.summary}</p>
+            <div className="flex items-center text-blue-600 text-sm font-medium">
+              Read Article <ArrowLeft size={14} className="ml-1 rotate-180" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const ResearchSection = () => (
   <div className="max-w-4xl mx-auto animate-fade-in">
@@ -888,6 +962,7 @@ const App = () => {
       case 'service': return <ServiceSection />;
       case 'award': return <AwardSection />;
       case 'resume': return <ResumeSection />;
+      case 'blog': return <BlogSection />; // Added Blog Section to switch
       default: return <HomeSection />;
     }
   };
