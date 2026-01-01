@@ -288,7 +288,7 @@ const HomeSection = () => (
              My research interests broadly lie at the intersection of AI, political communication, and narrative studies. I am currently working on three strands of projects: (1) Strategic narrative analysis and persuasion - how AI shape the classic strategic narrative theory and impact people's political beliefs and public policy; (2) AI-assisted text analysis - evaluate the methodological validity of using AI in deductive annotation tasks in social science research; (3) AI's impact on cognition - how AI shapes the cognitive capabilities of human in communication, particulalry on the cognitive offloading. 
           </p>
           <p>   
-            <span className="text-orange-600 font-semibold"> I am currently on the job market and actively seeking academic research opportunities beginning in mid 2026. Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
+            <span className="text-blue-600 font-semibold"> I am currently on the job market and actively seeking academic research opportunities beginning in mid 2026. Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
           </p>       
         </div>
       </section>
