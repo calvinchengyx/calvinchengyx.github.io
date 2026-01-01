@@ -5,6 +5,22 @@
     - remove short version CV
     - 
 
+```python
+# after making changes, follow these steps to deploy the updated website to GitHub Pages
+
+# Stage all your changes
+git add .
+
+# Commit your changes with a descriptive message
+git commit -m "Updated website content and design"
+
+# Push source code to main branch (optional but recommended)
+git push origin main
+
+# Build and deploy to GitHub Pages
+npm run deploy
+```
+
 ## nov 29 2025
 - tasks: added a new section "blog" to the webiste
 - start time: 13:30

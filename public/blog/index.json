@@ -5,13 +5,12 @@
     "date": "2025-11-29",
     "summary": "How to leverage AI tools to write research grant.",
     "filepath": "howtoai-grantwriting-20251128.md"
+  },
+  {
+    "id": "howtoai-copy-editing",
+    "title": "HowToAI - Copy Editing",
+    "date": "2025-10-11",
+    "summary": "How to responsibly use AI tools for academic copy editing.",
+    "filepath": "howtoai-copyediting-20251011.md"
   }
-  // },
-  // {
-  //   "id": "test2",
-  //   "title": "xxx",
-  //   "date": "xxx",
-  //   "summary": "xxx",
-  //   "filepath": "lxx.md"
-  // }
 ]

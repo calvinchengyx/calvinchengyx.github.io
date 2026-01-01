@@ -49,6 +49,9 @@ interface TeachingItem {
   institution: string;
   period: string;
   description: string;
+  links?: {
+    materials?: string;
+  };
 }
 
 interface AwardItem {
@@ -77,14 +80,12 @@ interface SidebarProps {
 
 const NEWS_DATA: NewsItem[] = [
   { date: "Dec 10 2025", content: "Started new role as Research Lead at Misinformation Group FinAI" },
-  { date: "Dec 4 2025", content: "Passed the viva (of course with some corrections)! & Officially on the job market." },
+  { date: "Dec 4 2025", content: "Passed Viva!" },
   { date: "Nov 9 2025", content: "Presented my narrative detection work at CODI workshop EMNLP 2025 in Suzhou China" },
   { date: "Nov 9 2025", content: "Joined the ICA26 Hackathon organization team for the preconference in Cape Town in 2026!" },
   { date: "July 10 2025", content: "Presenting my thesis last empirical chapter at the 75th ICA in Denver (First student paper in Computational Methods Division)." },
   { date: "May 1 2025", content: "Started my new role as Research Assistant at OII tracking LLM influence." },
   { date: "Jan 2025", content: "Started my new role as Research Lead at the Oxford Computational Political Science Group." },
-  // { date: "2025", content: "Paper 'Beyond English' accepted to ICWSM 2026 (Forthcoming)." },
-  // { date: "Sep 2024", content: "Graduate Lecturer for Computational Social Science at Brawijaya University." },
 ];
 
 const PUBLICATIONS_DATA: Publication[] = [
@@ -101,28 +102,28 @@ const PUBLICATIONS_DATA: Publication[] = [
     authors: "Quelle, D., Cheng, C. Y., Bovet, A., & Hale, S. A.",
     venue: "EPJ Data Science, 14(1), 22",
     year: "2025",
-    links: { paper: "#" }
+    links: { paper: "https://link.springer.com/article/10.1140/epjds/s13688-025-00520-6" }
   },
   {
     title: "Diasporic citizen journalism: Exploring the discussion on the 2022 blank paper protests in the Chinese Twitter community",
     authors: "Zeng, J., & Cheng, C. Y.",
     venue: "Journalism",
     year: "2024",
-    links: { paper: "#" }
+    links: { paper: "https://journals.sagepub.com/doi/10.1177/14648849241250191" }
   },
   {
     title: "C-MFD 2.0: Developing a Chinese Moral Foundation Dictionary",
     authors: "Cheng, C. Y., & Zhang, W.",
     venue: "Computational Communication Research, 5(2)",
     year: "2023",
-    links: { paper: "#" }
+    links: { paper: "https://journal.computationalcommunication.org/article/view/4776" }
   },
   {
     title: "Authority-led conspiracy theories in China during the COVID-19 pandemic",
     authors: "Cheng, C. Y., Zhang, W. J., & Zhang, Q.",
     venue: "Convergence, 28(4)",
     year: "2022",
-    links: { paper: "#" }
+    links: { paper: "https://journals.sagepub.com/doi/10.1177/13548565221102592" }
   },
 ];
 
@@ -131,31 +132,36 @@ const TEACHING_DATA: TeachingItem[] = [
     course: "Computational Social Science in Political Communication with Python",
     role: "Graduate Lecturer",
     institution: "Brawijaya University",
-    period: "Sep - Dec 2024",
-    description: "Designed and taught a computational text analysis course featuring hands-on projects on sentiment analysis, word embeddings, and LLMs."
+    period: "2024",
+    description: "Designed and taught a computational text analysis course featuring hands-on projects on sentiment analysis, word embeddings, and LLMs.",
+    links: {materials: "https://docs.google.com/presentation/d/1npwXKyaNKQCWpme26fAXcmWOrRfqvjNN/edit?usp=sharing&ouid=114849464238842402590&rtpof=true&sd=true" }
   },
   {
     course: "Fundamental Social Data Science",
     role: "Graduate Teaching Assistant",
     institution: "Oxford Internet Institute",
     period: "2023 - 2024",
-    description: "Assisted lecturers in guiding students through critical assessments of research methods and theories in computational social science."
+    description: "Assisted lecturers in guiding students through critical assessments of research methods and theories in computational social science.",
+    links: { materials: "https://www.oii.ox.ac.uk/study/courses/data-and-society-1" }
   },
   {
-    course: "Computational Propaganda; AI & Society; AI & Governance",
+    course: "Computational Propaganda; AI & Society; AI & Governance; AI Ethics",
     role: "Undergraduate Tutor",
-    institution: "University of Oxford",
+    institution: "Colleges at University of Oxford",
     period: "2022 - Present",
     description: "Tutor for St Catherine's College and other programs. Designed syllabi incorporating theoretical foundations and research design methods."
   }
 ];
 
 const AWARD_DATA: AwardItem[] = [
-  { title: "Great Britain China Educational Trust Student Award ", organization: "GB China Educational Trust", year: "2024 - 2025" },
-  { title: "Alan Turing Institute & DSO National Laboratories Fund", organization: "Alan Turing Institute", year: "2022 - 2024" },
-  { title: "Dieter Schwarz Foundation Fellowship on AI Government and Policy", organization: "Dieter Schwarz Foundation", year: "2021 - 2022" },
-  { title: "Simon Li Scholarship (£5,000)", organization: "China Oxford Scholarship Fund", year: "2021 - 2022" },
+  { title: "Great Britain China Educational Trust Student Award", organization: "GB China Educational Trust", year: "2025" },
+  { title: "Stanford House Tutor Research Grant", organization: "Stanford House Oxford", year: "2025" },
+  { title: "St Cross College Travel & Research Grant", organization: "St Cross College", year: "2021-2024" },
+  { title: "Alan Turing Institute & DSO National Laboratories Fund", organization: "Alan Turing Institute", year: "2023 - 2025" },
+  { title: "Dieter Schwarz Foundation Fellowship on AI Government and Policy", organization: "Dieter Schwarz Foundation", year: "2022" },
+  { title: "Simon Li Scholarship", organization: "China Oxford Scholarship Fund", year: "2021" },
   { title: "Postgraduate Scholarship", organization: "Chinese University of Hong Kong", year: "2019 - 2021" },
+  { title: "Second Undergraduate Scholarship", organization: "University of International Business and Economics", year: "2011 - 2014" },
 ];
 
 // --- Sub-Components ---
@@ -220,10 +226,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenu
           {/* Footer Social Links */}
           <div className="mt-auto pt-6 border-t border-slate-200">
              <div className="flex justify-center space-x-4">
-                <a href="https://scholar.google.com/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="Google Scholar"><GraduationCap size={20}/></a>
+                <a href="https://scholar.google.com/citations?user=WRQAMdgAAAAJ&hl=en" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="Google Scholar"><GraduationCap size={20}/></a>
                 <a href="https://www.oii.ox.ac.uk/people/profiles/calvin-cheng/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="OII Profile"><Landmark size={20}/></a>
                 <a href="https://github.com/calvinchengyx" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="GitHub"><Github size={20}/></a>
-                <a href="#" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="LinkedIn"><Linkedin size={20}/></a>
+                <a href="https://www.linkedin.com/in/calvin-yixiang-cheng-1aab24a0/" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-slate-900" title="LinkedIn"><Linkedin size={20}/></a>
              </div>
              <p className="text-xs text-center text-slate-400 mt-4">© 2025 Calvin Cheng</p>
           </div>
@@ -280,9 +286,10 @@ const HomeSection = () => (
           </p>
           <p>
              My research interests broadly lie at the intersection of AI, political communication, and narrative studies. I am currently working on three strands of projects: (1) Strategic narrative analysis and persuasion - how AI shape the classic strategic narrative theory and impact people's political beliefs and public policy; (2) AI-assisted text analysis - evaluate the methodological validity of using AI in deductive annotation tasks in social science research; (3) AI's impact on cognition - how AI shapes the cognitive capabilities of human in communication, particulalry on the cognitive offloading. 
-
-            <span className="text-red-600 font-semibold"> I am currently on the job market and actively seeking academic research opportunities beginning in mid 2026. Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
           </p>
+          <p>   
+            <span className="text-orange-600 font-semibold"> I am currently on the job market and actively seeking academic research opportunities beginning in mid 2026. Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
+          </p>       
         </div>
       </section>
 
@@ -541,30 +548,12 @@ const AwardSection = () => (
 );
 
 const ResumeSection = () => {
-  const [resumeType, setResumeType] = useState<'academic' | 'professional'>('academic');
-
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-slate-200 gap-4">
         <h2 className="text-3xl font-bold text-slate-900">Resume / CV</h2>
         
         <div className="flex items-center gap-4">
-            {/* Toggle Switch */}
-            <div className="bg-slate-100 p-1 rounded-lg flex">
-                <button 
-                    onClick={() => setResumeType('academic')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${resumeType === 'academic' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
-                >
-                    <GraduationCap size={16} /> Academic
-                </button>
-                <button 
-                    onClick={() => setResumeType('professional')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${resumeType === 'professional' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
-                >
-                    <Briefcase size={16} /> Professional
-                </button>
-            </div>
-
             <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm font-medium">
                 <Download size={16} /> PDF
             </button>
@@ -574,8 +563,8 @@ const ResumeSection = () => {
       {/* Resume Preview Paper Effect */}
       <div className="bg-white p-8 md:p-12 shadow-md border border-slate-200 min-h-[800px] mx-auto max-w-[850px] animate-fade-in text-slate-900">
         
-        {/* --- ACADEMIC CV CONTENT (Exact Match) --- */}
-        {resumeType === 'academic' && (
+        {/* --- ACADEMIC CV CONTENT --- */}
+        <div className="text-sm leading-relaxed">(
             <div className="text-sm leading-relaxed">
                 {/* Header */}
                 <div className="text-center mb-8">
@@ -881,73 +870,6 @@ const ResumeSection = () => {
                     </div>
                 </div>
             </div>
-        )}
-
-        {/* --- PROFESSIONAL RESUME CONTENT (Summarized version still available) --- */}
-        {resumeType === 'professional' && (
-            <>
-                 <div className="mb-6">
-                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-4">Technical Skills</h3>
-                    <div className="text-sm text-slate-700 grid grid-cols-1 gap-2">
-                        <div><span className="font-bold">Languages:</span> Python, R, SPSS, SQL, HTML, CSS, LaTeX</div>
-                        <div><span className="font-bold">Data Science:</span> NLP (SpaCy, NLTK, HuggingFace), Machine Learning, Pandas, NumPy</div>
-                        <div><span className="font-bold">Tools:</span> VSCode, RStudio, Git, Google Console, Linux Server</div>
-                        <div><span className="font-bold">Languages:</span> English (Professional), Mandarin (Native)</div>
-                    </div>
-                </div>
-
-                <div className="mb-6">
-                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-4">Professional Experience</h3>
-                    
-                    <div className="mb-4">
-                        <div className="flex justify-between font-bold text-slate-900">
-                            <span>DT Caijing, China Business Network</span>
-                            <span>Shanghai</span>
-                        </div>
-                        <div className="flex justify-between text-slate-700 text-sm mb-1">
-                            <span className="italic">Deputy Editor-in-Chief</span>
-                            <span>2016 - 2019</span>
-                        </div>
-                        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2">
-                            <li>Editor of "Data Scientists" column; covered feature stories on data science in business.</li>
-                            <li>Led a 3-member research team providing data-driven consulting for local businesses.</li>
-                        </ul>
-                    </div>
-
-                    <div className="mb-4">
-                        <div className="flex justify-between font-bold text-slate-900">
-                            <span>Initium Media</span>
-                            <span>Hong Kong</span>
-                        </div>
-                        <div className="flex justify-between text-slate-700 text-sm mb-1">
-                            <span className="italic">Data Journalist Intern</span>
-                            <span>2016</span>
-                        </div>
-                        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2">
-                            <li>Crafted data-driven stories using sentiment and social network analysis.</li>
-                            <li>Developed infographics and interactive visualizations using R Shiny.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="mb-6">
-                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-1 mb-4">Education</h3>
-                    <div className="mb-2">
-                        <div className="flex justify-between font-bold text-slate-900 text-sm">
-                            <span>University of Oxford (DPhil)</span>
-                            <span>Expected 2025</span>
-                        </div>
-                    </div>
-                    <div className="mb-2">
-                        <div className="flex justify-between font-bold text-slate-900 text-sm">
-                            <span>University of Hong Kong (Master of Journalism)</span>
-                            <span>2015 - 2016</span>
-                        </div>
-                    </div>
-                </div>
-            </>
-        )}
-
       </div>
     </div>
   );
