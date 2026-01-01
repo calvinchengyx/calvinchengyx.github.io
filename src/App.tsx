@@ -76,11 +76,15 @@ interface SidebarProps {
 // --- Mock Data / Real Content ---
 
 const NEWS_DATA: NewsItem[] = [
-  { date: "May 2025", content: "Started new role as Research Assistant at OII tracking LLM influence." },
-  { date: "Jan 2025", content: "Appointed Research Lead at the Oxford Computational Political Science Group." },
-  { date: "2025", content: "Paper 'Beyond English' accepted to ICWSM 2026 (Forthcoming)." },
-  { date: "2025", content: "Presenting at the 75th ICA in Denver (First student paper in Computational Methods Division)." },
-  { date: "Sep 2024", content: "Graduate Lecturer for Computational Social Science at Brawijaya University." },
+  { date: "Dec 10 2025", content: "Started new role as Research Lead at Misinformation Group FinAI" },
+  { date: "Dec 4 2025", content: "Passed the viva (of course with some corrections)! & Officially on the job market." },
+  { date: "Nov 9 2025", content: "Presented my narrative detection work at CODI workshop EMNLP 2025 in Suzhou China" },
+  { date: "Nov 9 2025", content: "Joined the ICA26 Hackathon organization team for the preconference in Cape Town in 2026!" },
+  { date: "July 10 2025", content: "Presenting my thesis last empirical chapter at the 75th ICA in Denver (First student paper in Computational Methods Division)." },
+  { date: "May 1 2025", content: "Started my new role as Research Assistant at OII tracking LLM influence." },
+  { date: "Jan 2025", content: "Started my new role as Research Lead at the Oxford Computational Political Science Group." },
+  // { date: "2025", content: "Paper 'Beyond English' accepted to ICWSM 2026 (Forthcoming)." },
+  // { date: "Sep 2024", content: "Graduate Lecturer for Computational Social Science at Brawijaya University." },
 ];
 
 const PUBLICATIONS_DATA: Publication[] = [
@@ -138,7 +142,7 @@ const TEACHING_DATA: TeachingItem[] = [
     description: "Assisted lecturers in guiding students through critical assessments of research methods and theories in computational social science."
   },
   {
-    course: "Computational Propaganda; AI & Society",
+    course: "Computational Propaganda; AI & Society; AI & Governance",
     role: "Undergraduate Tutor",
     institution: "University of Oxford",
     period: "2022 - Present",
@@ -147,9 +151,9 @@ const TEACHING_DATA: TeachingItem[] = [
 ];
 
 const AWARD_DATA: AwardItem[] = [
-  { title: "Great Britain China Educational Trust Student Award (£2,000)", organization: "GB China Educational Trust", year: "2024 - 2025" },
+  { title: "Great Britain China Educational Trust Student Award ", organization: "GB China Educational Trust", year: "2024 - 2025" },
   { title: "Alan Turing Institute & DSO National Laboratories Fund", organization: "Alan Turing Institute", year: "2022 - 2024" },
-  { title: "Dieter Schwarz Foundation Fellowship on AI Government and Policy (£22,000)", organization: "Dieter Schwarz Foundation", year: "2021 - 2022" },
+  { title: "Dieter Schwarz Foundation Fellowship on AI Government and Policy", organization: "Dieter Schwarz Foundation", year: "2021 - 2022" },
   { title: "Simon Li Scholarship (£5,000)", organization: "China Oxford Scholarship Fund", year: "2021 - 2022" },
   { title: "Postgraduate Scholarship", organization: "Chinese University of Hong Kong", year: "2019 - 2021" },
 ];
@@ -268,16 +272,16 @@ const HomeSection = () => (
         <h3 className="text-xl font-bold text-slate-900 border-l-4 border-blue-600 pl-3 mb-4">About Me</h3>
         <div className="prose prose-slate max-w-none text-slate-700">
           <p className="mb-4">
-            Hello! I am a <strong>DPhil Student in Social Data Science</strong> at the <strong>Oxford Internet Institute</strong>, University of Oxford. 
-            My research is supervised by <strong>Dr. Scott A. Hale</strong> and I am also affiliated with the Alan Turing Institute.
+            Hello! Welcome to my personal website. My name's Calvin Yixiang Cheng, and I am a DPhil candidate in Social Data Science at the Oxford Internet Institute, University of Oxford. My expertise is in computational social science, where my academic passion is to achieve a more informed public by understanding how artifical intelligience and digital technologies shape people's belief through narratives. 
           </p>
           <p className="mb-4">
             My doctoral thesis, titled <em>"The Persistence of Online Conspiracy Theories: Sociopsychological Drivers, Language Mutations, and Cross-Platform Narratives,"</em> investigates 
-            how misinformation survives and evolves in the digital age. I employ computational methods including Natural Language Processing (NLP), Large Language Models (LLMs), and network analysis.
+            how misleading narratives persist, mutate and spread across media platforms and language barriers. I employ a wide range of computational methods including Natural Language Processing (NLP), Large Language Models (LLMs), machine learning, statistical modelling, and experiments.
           </p>
           <p>
-             I currently serve as the <strong>Research Lead</strong> at the Oxford Computational Political Science Group. 
-             Previously, I obtained my MPhil in Communication from the Chinese University of Hong Kong.
+             My research interests broadly lie at the intersection of AI, political communication, and narrative studies. I am currently working on three strands of projects: (1) Strategic narrative analysis and persuasion - how AI shape the classic strategic narrative theory and impact people's political beliefs and public policy; (2) AI-assisted text analysis - evaluate the methodological validity of using AI in deductive annotation tasks in social science research; (3) AI's impact on cognition - how AI shapes the cognitive capabilities of human in communication, particulalry on the cognitive offloading. 
+
+            <span className="text-red-600 font-semibold"> I am currently on the job market and actively seeking academic research opportunities beginning in mid 2026. Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
           </p>
         </div>
       </section>

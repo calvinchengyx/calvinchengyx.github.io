@@ -1,5 +1,19 @@
 # memo
 
+## Jan 1 2026
+- task: update personal website for job application ready
+    - remove short version CV
+    - 
+
+## nov 29 2025
+- tasks: added a new section "blog" to the webiste
+- start time: 13:30
+- end time: 14:00
+- notes:
+    - the new section is to host my blogs notes on how to use AI for academic research, using grant writing as an example
+    - however, i also want to change the way how i store my data files, currently almost everything is on one huge html file. but just using vibe coding is not enough. often, gemini 3 will change other parts of the code when i just want to change one section. i need to figure out a better way to vibe coding my website when codes get chunkier. a possible solution is just google ai studio. studio is good at working on something from scratch, but difficult to maintain existing projects (because of context window? i always got errors when i try to upload existing code base to google ai studio). 
+    - anyway, i will stop here for today. should not spend too much on this. today's goal is achieved, just add a new section and a notebook to note my howtoai grant writing process.
+
 ## nov 25 2025
 - task: use gemini 3 pro rebuild my personal website
 - start time: 14:58
