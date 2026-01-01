@@ -564,10 +564,9 @@ const ResumeSection = () => {
       <div className="bg-white p-8 md:p-12 shadow-md border border-slate-200 min-h-[800px] mx-auto max-w-[850px] animate-fade-in text-slate-900">
         
         {/* --- ACADEMIC CV CONTENT --- */}
-        <div className="text-sm leading-relaxed">(
-            <div className="text-sm leading-relaxed">
-                {/* Header */}
-                <div className="text-center mb-8">
+        <div className="text-sm leading-relaxed">
+            {/* Header */}
+            <div className="text-center mb-8">
                     <h1 className="text-2xl font-bold uppercase tracking-wider mb-2">Calvin Yixiang Cheng</h1>
                     <div className="text-slate-700">
                         calvin.cheng@oii.ox.ac.uk<br/>
