@@ -33,5 +33,31 @@ Pain point: I need brainstorm more ideas, especially the novelty, and theorizati
 
 How AI can help? I feed in the context (writing a research proposal - one page), i feed in my potential collaborators' expertise, I ask for ideas on each bullet points with references and justifications. I prompt the conversation to be structured as Socratic dialogue to stimulate more critical thinking. (budget time: 1 hour). Then I only read those references suggested and picked useful by me. Here the major change is i switched the `toberead` list from using "google scholar + keywords + scan" => "Socratic dialogue + AI suggested references".
 
+time spent record: 1hour for bullet points. Then i got feedback from Andreu, and incorporated the feedback for the first one-pager. 
+
 ### Step 2: Expand Bullet Points into a Research Proposal
+
+pain point: hard to illustrate abstract ideas logically and coherently. 
+
+AI use: iterate with AI for logics, paragraph by paragraph. (1) write a paragaraph raw (2) fit into AI with it and basic logic (3) ask with socratic dialogue to improve the logic and clarity (4) evalute the suggestion and rewrite. (5) repeat (3)-(4) until satisfied with the paragraph with a clearere logic. 
+
+DONT: copy-paste AI generated text directly. Always rewrite yourself. otherwise, you are risking of not internalizing the ideas and logic. 
+
+The first one-pager cost 14:30-17:30 (2.5 hours)
+Iteration with AI for a presentable version:  I focus on the logic of each sentence. as long as the idea is clear, dont care about the writing style and specific wording. I just write the ideas, focusing of the overall structure (how many paragraphs, each par, what is the overarching sentence.). then within each paragraph, what are the main argument, what are the supporting evidence. how to use logical connectors to link sentences and transit smoothly. 
+
+This step result in a raw draft of the result proposal. 
+
+### Step 3. Revise with AI Assistance
+
+Then i revise based on the raw input. I fit the raw writing second iteration: focus on transition flow of writing. 
+
+- 1st iteration: logic within paragraph, i input the GPT5 with each par, ask for clarifing the key argument and logic flow of the paragraph. then i rewrite based on its suggestion.
+- 2nd iteration: review the whole draft. after the first iteratation, i waited for a day. Then I read the whole draft again, correcting the writing WITHOUT AI. 
+- 3rd iteration: I ask GPT5 to be critically and evaluate the draft as a grant reviewer, what are the weakness. i review its reviews and decide where to improve. and respond to its comments point by point. 
+- 4th iteration: I ask GPT5 to proofread, only change grammar mistakes, typos, and suggest better wording. ONLY do mimimal changes to the text.
+
+the 4 iteration takes about 2.5 hours. 
+
+Output: i have a presentable draft of the research proposal for human feedback. i sent to my colleagues for feedback. 
 
