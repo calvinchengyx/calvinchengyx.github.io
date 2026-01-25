@@ -171,7 +171,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenu
     { id: 'home', label: 'Home', icon: <Home size={18} /> },
     { id: 'research', label: 'Research', icon: <BookOpen size={18} /> },
     { id: 'teaching', label: 'Teaching', icon: <Users size={18} /> },
-    { id: 'service', label: 'Service', icon: <Briefcase size={18} /> },
+    { id: 'industry', label: 'Industry', icon: <Briefcase size={18} /> },
+    { id: 'service', label: 'Service', icon: <Award size={18} /> },
     { id: 'award', label: 'Awards', icon: <Award size={18} /> },
     { id: 'resume', label: 'Resume', icon: <FileText size={18} /> },
     { id: 'blog', label: 'Blog', icon: <PenTool size={18} /> }, // Added Blog Item
@@ -288,7 +289,7 @@ const HomeSection = () => (
              My research interests broadly lie at the intersection of AI, political communication, and narrative studies. I am currently working on three strands of projects: (1) Strategic narrative analysis and persuasion - how AI shape the classic strategic narrative theory and impact people's political beliefs and public policy; (2) AI-assisted text analysis - evaluate the methodological validity of using AI in deductive annotation tasks in social science research; (3) AI's impact on cognition - how AI shapes the cognitive capabilities of human in communication, particulalry on the cognitive offloading. 
           </p>
           <p>   
-            <span className="text-blue-600 font-semibold"> I am currently on the job market and actively seeking academic research opportunities beginning in mid 2026. Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
+            <span className="text-blue-600 font-semibold"> I am currently on the job market and actively seeking research opportunities and industry positions in technology product management roles.  Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
           </p>       
         </div>
       </section>
@@ -483,9 +484,109 @@ const TeachingSection = () => (
   </div>
 );
 
+const IndustrySection = () => (
+  <div className="max-w-4xl mx-auto animate-fade-in">
+    <h2 className="text-3xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">Industry Experience</h2>
+    
+    <div className="space-y-10">
+      
+      {/* Senior Roles Section */}
+      <section>
+        <div className="mb-6">
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow mb-6">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">China Business Network Co., Ltd</h3>
+                <p className="text-blue-600 font-medium">Senior Product Manager</p>
+              </div>
+              <div className="text-slate-500 text-sm bg-slate-100 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">
+                <span>Shanghai, China • 2016 - 2019</span>
+              </div>
+            </div>
+            <ul className="list-disc list-outside ml-5 space-y-2 text-slate-700 leading-relaxed mt-4">
+              <li>Created and scaled "Data Hero" content product from concept to 30+ feature stories profiling leading data scientists at Alibaba, Tencent, Baidu, and ByteDance, reaching 100K+ monthly readers focused on applied data science in business.</li>
+              <li>Led 3-person team developing "One KM from Tube Station" site-selection consulting product, delivering data-driven location analysis for 5+ retail clients in Beijing, Shanghai, and Shenzhen.</li>
+              <li>Co-designed and organized 30+ bi-weekly workshops and one "Top 50 Data Scientists" summit (500+ attendees). Built a data science for business solution community from scratch to 2,500+ active members over two years.</li>
+              <li>Co-developed an education product "Python for Data Science" course and recruited 500+ students.</li>
+            </ul>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow mb-6">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">Deep Echo Media Co., Ltd</h3>
+                <p className="text-blue-600 font-medium">Content Manager</p>
+              </div>
+              <div className="text-slate-500 text-sm bg-slate-100 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">
+                <span>Beijing, China • May 2018 - April 2019</span>
+              </div>
+            </div>
+            <ul className="list-disc list-outside ml-5 space-y-2 text-slate-700 leading-relaxed mt-4">
+              <li>Delivered 10+ analytical reports on publicly listed tech companies (e.g., Alibaba, Tencent, ByteDance), providing C-suite executives with data-driven insights on corporate strategy. Reports received 100K+ reviews on WeChat.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Internships Section */}
+      <section>
+        <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <span className="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+          Early Career & Internships
+        </h3>
+        <div className="space-y-4">
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+              <div>
+                <h4 className="text-base font-bold text-slate-900">Project Manager</h4>
+                <p className="text-slate-600 text-sm">Journalism and Media Study Center, University of Hong Kong</p>
+              </div>
+              <span className="text-slate-500 text-sm bg-slate-100 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">Hong Kong • Aug - Nov 2016</span>
+            </div>
+            <p className="text-slate-700 leading-relaxed mt-2">Analyzed the social media campaign strategies of politicians in the 2015 Hong Kong Legislative Council election using visual analysis.</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+              <div>
+                <h4 className="text-base font-bold text-slate-900">Data Journalist Intern</h4>
+                <p className="text-slate-600 text-sm">Initium Media</p>
+              </div>
+              <span className="text-slate-500 text-sm bg-slate-100 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">Hong Kong • May - Aug 2016</span>
+            </div>
+            <p className="text-slate-700 leading-relaxed mt-2">Scraped and analyzed data to deliver insights and support for investigative journalism. Crafted data-driven stories using computational techniques such as sentiment and social network analysis. Developed infographics and interactive visualizations using R Shiny and HTML.</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+              <div>
+                <h4 className="text-base font-bold text-slate-900">Data Analyst Intern</h4>
+                <p className="text-slate-600 text-sm">Journalism and Media Study Center, University of Hong Kong</p>
+              </div>
+              <span className="text-slate-500 text-sm bg-slate-100 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">Hong Kong • Dec 2015 - Mar 2016</span>
+            </div>
+            <p className="text-slate-700 leading-relaxed mt-2">Managed and maintained the Weiboscope database at HKU. Led a Weibo censorship study on human rights lawyers in China. The article was published on Radio Television Hong Kong.</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+              <div>
+                <h4 className="text-base font-bold text-slate-900">Tech Journalist Intern</h4>
+                <p className="text-slate-600 text-sm">Online Media Group, Tencent</p>
+              </div>
+              <span className="text-slate-500 text-sm bg-slate-100 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">Beijing • Jan - Jun 2015</span>
+            </div>
+            <p className="text-slate-700 leading-relaxed mt-2">Assisted journalists with coverage of Chinese technology companies by providing data analysis on financial statements.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+);
+
 const ServiceSection = () => (
   <div className="max-w-4xl mx-auto animate-fade-in">
-    <h2 className="text-3xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">Professional Service</h2>
+    <h2 className="text-3xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">Academic Service</h2>
     
     <div className="space-y-10">
       
@@ -512,12 +613,15 @@ const ServiceSection = () => (
           Leadership & Organization
         </h3>
         <ul className="list-disc list-outside ml-5 space-y-2 text-slate-700 leading-relaxed">
-           <li>
-            <strong className="text-slate-900">Research Lead</strong>, Oxford Computational Political Science Group (2025 - Present)
-            <br/><span className="text-slate-600 text-sm">Leading a five-member research team on moral contagion theory; supervising graduate students.</span>
+          <li>
+            <strong className="text-slate-900">ICA 2026 Pre-Conference Hackathon Organization Committee</strong>, International Communication Association (2025 - 2026)
           </li>
           <li>
-            <strong className="text-slate-900">Project Manager</strong>, Journalism and Media Study Center, HKU (2016)
+            <strong className="text-slate-900">ICWSM Misinformation Workshop Organization Committee</strong>, The 20th International AAAI Conference on Web and Social Media (2026)
+          </li>
+          <li>
+            <strong className="text-slate-900">Research Lead</strong>, Oxford Computational Political Science Group (2025 - Present)
+            <br/><span className="text-slate-600 text-sm">Leading a five-member research team on moral contagion theory; supervising graduate students.</span>
           </li>
         </ul>
       </section>
@@ -548,12 +652,38 @@ const AwardSection = () => (
 );
 
 const ResumeSection = () => {
+  const [cvType, setCvType] = useState<'academic' | 'professional'>('academic');
+
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-slate-200 gap-4">
         <h2 className="text-3xl font-bold text-slate-900">Resume / CV</h2>
         
         <div className="flex items-center gap-4">
+            {/* CV Type Toggle */}
+            <div className="flex items-center bg-slate-100 rounded-lg p-1">
+              <button 
+                onClick={() => setCvType('academic')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  cvType === 'academic' 
+                    ? 'bg-white text-slate-900 shadow-sm' 
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Academic
+              </button>
+              <button 
+                onClick={() => setCvType('professional')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  cvType === 'professional' 
+                    ? 'bg-white text-slate-900 shadow-sm' 
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Professional
+              </button>
+            </div>
+            
             <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm font-medium">
                 <Download size={16} /> PDF
             </button>
@@ -563,7 +693,8 @@ const ResumeSection = () => {
       {/* Resume Preview Paper Effect */}
       <div className="bg-white p-8 md:p-12 shadow-md border border-slate-200 min-h-[800px] mx-auto max-w-[850px] animate-fade-in text-slate-900">
         
-        {/* --- ACADEMIC CV CONTENT --- */}
+        {cvType === 'academic' ? (
+        /* --- ACADEMIC CV CONTENT --- */
         <div className="text-sm leading-relaxed">
             {/* Header */}
             <div className="text-center mb-8">
@@ -869,6 +1000,131 @@ const ResumeSection = () => {
                     </div>
                 </div>
             </div>
+        ) : (
+        /* --- PROFESSIONAL CV CONTENT --- */
+        <div className="text-sm leading-relaxed">
+            {/* Header */}
+            <div className="text-center mb-8">
+                <h1 className="text-2xl font-bold uppercase tracking-wider mb-2">Calvin Yixiang Cheng</h1>
+                <div className="text-slate-700">
+                    calvin.cheng@oii.ox.ac.uk<br/>
+                    Oxford, United Kingdom
+                </div>
+            </div>
+
+            {/* About Me */}
+            <div className="mb-6">
+                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">About Me</h3>
+                <div className="bg-yellow-50 border border-slate-200 p-4 rounded text-xs text-slate-800">
+                    I have a PhD in social data science from Oxford University with 7+ years research and working experience in data science, product management, and content strategy. I have strong technical expertise in natural language processing and applied data science (AI). I'm also a collaborative team player, effective communicator, and empathetic people person.
+                </div>
+            </div>
+
+            {/* Experience */}
+            <div className="mb-6">
+                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Experience</h3>
+                
+                <div className="mb-4">
+                    <div className="flex justify-between font-bold">
+                        <span>University of Oxford</span>
+                        <span>Oxford, UK</span>
+                    </div>
+                    <div className="italic text-xs mb-1">PhD Researcher and Data Science Teaching Assistant</div>
+                    <div className="text-xs text-slate-500 mb-2">May 2021 - PRESENT</div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
+                        <li>Led NLP-driven research projects on understanding misinformation diffusion on 6+ platforms, resulting in 3+ peer reviewed publications in top-ranked journals and proceedings, including EPJ Data Science, ICWSM, and Journalism.</li>
+                        <li>Built automated narrative-detection pipelines processing 5 million posts and trained multilingual language models for disguised misinformation detection. Presented in 5+ top academic conferences including EMNLP, ICA and IC²S².</li>
+                        <li>Designed LLM-assisted text analysis methods to track and study social contagion and user engagements on social media, presented at top political science conferences such as Political Study Association.</li>
+                    </ul>
+                </div>
+
+                <div className="mb-4">
+                    <div className="flex justify-between font-bold">
+                        <span>China Business Network Co., Ltd</span>
+                        <span>Shanghai, China</span>
+                    </div>
+                    <div className="italic text-xs mb-1">Senior Product Manager</div>
+                    <div className="text-xs text-slate-500 mb-2">2016 - 2019</div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
+                        <li>Created and scaled "Data Hero" content product from concept to 30+ feature stories profiling leading data scientists at Alibaba, Tencent, Baidu, and ByteDance, reaching 100K+ monthly readers focused on applied data science in business.</li>
+                        <li>Led 3-person team developing "One KM from Tube Station" site-selection consulting product, delivering data-driven location analysis for 5+ retail clients in Beijing, Shanghai, and Shenzhen.</li>
+                        <li>Co-designed and organized 30+ bi-weekly workshops and one "Top 50 Data Scientists" summit (500+ attendees). Built a data science for business solution community from scratch to 2,500+ active members over two years.</li>
+                        <li>Co-developed an education product "Python for Data Science" course and recruited 500+ students.</li>
+                    </ul>
+                </div>
+
+                <div className="mb-4">
+                    <div className="flex justify-between font-bold">
+                        <span>Deep Echo Media Co., Ltd</span>
+                        <span>Beijing, China</span>
+                    </div>
+                    <div className="italic text-xs mb-1">Content Manager</div>
+                    <div className="text-xs text-slate-500 mb-2">May 2018 - April 2019</div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
+                        <li>Delivered 10+ analytical reports on publicly listed tech companies (e.g., Alibaba, Tencent, ByteDance), providing C-suite executives with data-driven insights on corporate strategy. Reports received 100K+ reviews on WeChat.</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Education */}
+            <div className="mb-6">
+                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Education</h3>
+                
+                <div className="mb-4">
+                    <div className="flex justify-between">
+                        <span className="font-bold">University of Oxford, PhD Social Data Science</span>
+                        <span className="text-xs text-slate-500">October 2021 - May 2026</span>
+                    </div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700 mt-1">
+                        <li><strong>Thesis:</strong> The Persistence of Online Conspiracy: Sociopsychological Drivers, Language Mutations, & Pursuasive Narratives</li>
+                        <li><strong>Coursework:</strong> Python programming, inferential statistics, applied machine learning, natural language processing, AI ethics</li>
+                        <li><strong>Activity:</strong> Captain of Wolfson College Boat Club, competed in national (HoRR) and international regattas (Nanjing & Shenzhen)</li>
+                    </ul>
+                </div>
+
+                <div className="mb-4">
+                    <div className="flex justify-between">
+                        <span className="font-bold">Chinese University of Hong Kong, MPhil Communication</span>
+                        <span className="text-xs text-slate-500">Sep 2019 - July 2021</span>
+                    </div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700 mt-1">
+                        <li><strong>Thesis:</strong> The Survival of Conspiracy Theories on Social Media in the COVID-19 Pandemic</li>
+                        <li><strong>Courses:</strong> Statistics with R, Media Effect, Quantitative Research Methods, Qualitative Discourse Analysis, Research Design</li>
+                    </ul>
+                </div>
+
+                <div className="mb-4">
+                    <div className="flex justify-between">
+                        <span className="font-bold">University of Hong Kong, Master of Journalism</span>
+                        <span className="text-xs text-slate-500">Sep 2015 - Aug 2016</span>
+                    </div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700 mt-1">
+                        <li><strong>Courses:</strong> Data Journalism, Media Analytics, Financial Analysis, Media Ethics.</li>
+                        <li><strong>Intern:</strong> Produced 5+ data journalism stories at Initium Media Hong Kong using web scraping and D3.js–based visualizations.</li>
+                    </ul>
+                </div>
+
+                <div className="mb-4">
+                    <div className="font-bold">University of International Business and Economics</div>
+                    <div className="text-xs mb-1">BA International Studies (Major), LLB International Relations (minor)</div>
+                    <div className="text-xs text-slate-500 mb-1">Sep 2011 - Aug 2015</div>
+                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
+                        <li><strong>Intern:</strong> Intern Content Manager in Tencent Technology Media Group, and China Central Television</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Skills */}
+            <div className="mb-6">
+                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Skills</h3>
+                <div className="text-xs text-slate-700 space-y-1">
+                    <div><strong>Language:</strong> English (proficient), Mandarin (native), Cantonese (beginner)</div>
+                    <div><strong>Programming:</strong> Python (pandas, SpaCy), R, HTML, Markdown, LaTeX, GitHub, VSCode, RStudio, Huggingface</div>
+                    <div><strong>Transferable:</strong> Project management, data analytics, user research, event coordination, teamwork, time management</div>
+                </div>
+            </div>
+        </div>
+        )}
       </div>
     </div>
   );
@@ -881,6 +1137,7 @@ const App = () => {
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'industry': return <IndustrySection />;
       case 'home': return <HomeSection />;
       case 'research': return <ResearchSection />;
       case 'teaching': return <TeachingSection />;

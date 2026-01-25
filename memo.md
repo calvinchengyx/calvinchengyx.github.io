@@ -1,5 +1,12 @@
 # memo
 
+## Jan 24 2026
+
+- task: 
+    1. update the about me page to add a industry job 
+    2. update 
+
+
 ## Jan 1 2026
 - task: update personal website for job application ready
     - remove short version CV
