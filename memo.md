@@ -1,10 +1,21 @@
 # memo
 
+## Aug 30 2026
+- task: website refresh for new UZH postdoc chapter
+    1. removed "Blog" section from nav (kept blog .md files in public/blog for later)
+    2. Resume tab now embeds a Google Drive PDF instead of hardcoded CV text
+    3. added 8 News Updates entries (UZH move, new publications, talks)
+    4. updated Home profile + About Me bio for postdoc role at IKMZ, UZH
+    5. rebuilt Research tab: publications synced from CV (added code/paper links), list changed to a vertical timeline
+
 ## Jan 24 2026
 
 - task: 
-    1. update the about me page to add a industry job 
-    2. update 
+    1. update the about me page to add a industry job statement
+    2. update resume section with a professional resume for industry job application
+    3. add a new section "Industry Experience" to showcase my relevant skills and projects for industry jobs
+- start time: 18:20
+- end time: 18:45
 
 
 ## Jan 1 2026

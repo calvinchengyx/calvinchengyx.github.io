@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown'; // Requires: npm install react-markdown
-// import remarkGfm from 'remark-gfm';      // Uncomment locally for tables/strikethrough: npm install remark-gfm
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  FileText, 
-  BookOpen, 
-  Award, 
-  Users, 
-  Menu, 
-  X, 
+import React, { useState } from 'react';
+import {
+  Github,
+  Linkedin,
+  Mail,
+  FileText,
+  BookOpen,
+  Award,
+  Users,
+  Menu,
+  X,
   Video,
   Code,
   Download,
   Home,
   Briefcase,
   GraduationCap,
-  Landmark,
-  PenTool,   // Added for Blog
-  ArrowLeft, // Added for Blog navigation
-  Calendar   // Added for Blog date
+  Landmark
 } from 'lucide-react';
 
 // --- Types & Interfaces ---
@@ -31,6 +26,7 @@ interface NewsItem {
 }
 
 interface Publication {
+  id: string;
   title: string;
   authors: string;
   venue: string;
@@ -40,7 +36,7 @@ interface Publication {
     code?: string;
     video?: string;
   };
-  status?: string; 
+  status?: string;
 }
 
 interface TeachingItem {
@@ -60,15 +56,6 @@ interface AwardItem {
   year: string;
 }
 
-// New Interface for Blog Posts
-interface BlogPost {
-  id: string;
-  title: string;
-  date: string;
-  summary: string;
-  filepath: string;
-}
-
 interface SidebarProps {
     activeTab: string;
     setActiveTab: React.Dispatch<React.SetStateAction<string>>;
@@ -79,32 +66,58 @@ interface SidebarProps {
 // --- Mock Data / Real Content ---
 
 const NEWS_DATA: NewsItem[] = [
+  { date: "Sep 1 2026", content: "Started my postdoctoral position at UZH and relocated to Zurich, Switzerland — new chapter!" },
+  { date: "Aug 1 2026", content: "Left my beloved Oxford after five years." },
+  { date: "Jul 29 2026", content: "New publication! \"Language mutations and the persistence of COVID-19 conspiracy theories on social media\" published in Computers in Human Behavior." },
+  { date: "Jun 15 2026", content: "Attended the 2nd Disinformation Summer Institute at University of Washington, Seattle, USA." },
+  { date: "Jun 3 2026", content: "Presented and organized a pre-conference at ICA, Cape Town, South Africa." },
+  { date: "May 20 2026", content: "Visited and presented my work at the London Social Media Observatory (LSMO)." },
+  { date: "May 5 2026", content: "Presented an NLP session for the Oxford China Policy Lab on how to apply NLP methodologies to policy research." },
+  { date: "Mar 30 2026", content: "New publication! \"Beyond English: Evaluating Automated Measurement of Moral Foundations in Non-English Discourse with a Chinese Case Study\" published in the Proceedings of ICWSM." },
   { date: "Dec 10 2025", content: "Started new role as Research Lead at Misinformation Group FinAI" },
-  { date: "Dec 4 2025", content: "Passed Viva!" },
-  { date: "Nov 9 2025", content: "Presented my narrative detection work at CODI workshop EMNLP 2025 in Suzhou China" },
+  { date: "Nov 9 2025" , content: "Presented my narrative detection work at CODI workshop EMNLP 2025 in Suzhou China" },
   { date: "Nov 9 2025", content: "Joined the ICA26 Hackathon organization team for the preconference in Cape Town in 2026!" },
   { date: "July 10 2025", content: "Presenting my thesis last empirical chapter at the 75th ICA in Denver (First student paper in Computational Methods Division)." },
   { date: "May 1 2025", content: "Started my new role as Research Assistant at OII tracking LLM influence." },
   { date: "Jan 2025", content: "Started my new role as Research Lead at the Oxford Computational Political Science Group." },
 ];
 
+// Sorted by publication date, most recent first.
 const PUBLICATIONS_DATA: Publication[] = [
   {
-    title: "Beyond English: Evaluating Automated Measurement of Moral Framing in Non-English Discourse with a Chinese Case Study",
-    authors: "Cheng, C., & Hale, S. A.",
-    venue: "Proceedings of the International AAAI Conference on Web and Social Media (ICWSM)",
+    id: "pub-covid-language-mutations",
+    title: "Language mutations and the persistence of COVID-19 conspiracy theories on social media",
+    authors: "Cheng, C. Y., Quelle, D., & Hale, S. A.",
+    venue: "Computers in Human Behavior, 109137",
     year: "2026",
-    status: "Forthcoming",
-    links: { paper: "https://arxiv.org/abs/2502.02451" }
+    links: { paper: "https://www.sciencedirect.com/science/article/pii/S0747563226002347", code: "https://osf.io/usqxn" }
   },
   {
-    title: "Lost in translation: using global fact-checks to measure multilingual misinformation prevalence, spread, and evolution",
+    id: "pub-beyond-english",
+    title: "Beyond English: Evaluating Automated Measurement of Moral Foundations in Non-English Discourse with a Chinese Case Study",
+    authors: "Cheng, C. Y., & Hale, S. A.",
+    venue: "Proceedings of the International AAAI Conference on Web and Social Media (ICWSM), 20(1), 487–503",
+    year: "2026",
+    links: { paper: "https://arxiv.org/abs/2502.02451", code: "https://github.com/calvinchengyx/cross-lan-mft-measure" }
+  },
+  {
+    id: "pub-lost-in-translation",
+    title: "Lost in translation: using global fact-checks to measure multilingual misinformation prevalence, spread & evolution",
     authors: "Quelle, D., Cheng, C. Y., Bovet, A., & Hale, S. A.",
     venue: "EPJ Data Science, 14(1), 22",
     year: "2025",
-    links: { paper: "https://link.springer.com/article/10.1140/epjds/s13688-025-00520-6" }
+    links: { paper: "https://link.springer.com/article/10.1140/epjds/s13688-025-00520-6", code: "https://github.com/dorianquelle/Lost-In-Translation" }
   },
   {
+    id: "pub-health-info-seeking",
+    title: "Online Health Information Seeking, eHealth Literacy, and Health Behaviors Among Chinese Internet Users: Cross-Sectional Survey Study",
+    authors: "Liu, D., Yang, S., Cheng, C. Y., Cai, L., & Su, J.",
+    venue: "Journal of Medical Internet Research, 26, e54135",
+    year: "2024",
+    links: { paper: "https://www.jmir.org/2024/1/e54135/" }
+  },
+  {
+    id: "pub-diasporic-citizen-journalism",
     title: "Diasporic citizen journalism: Exploring the discussion on the 2022 blank paper protests in the Chinese Twitter community",
     authors: "Zeng, J., & Cheng, C. Y.",
     venue: "Journalism",
@@ -112,16 +125,26 @@ const PUBLICATIONS_DATA: Publication[] = [
     links: { paper: "https://journals.sagepub.com/doi/10.1177/14648849241250191" }
   },
   {
+    id: "pub-cmfd",
     title: "C-MFD 2.0: Developing a Chinese Moral Foundation Dictionary",
     authors: "Cheng, C. Y., & Zhang, W.",
     venue: "Computational Communication Research, 5(2)",
     year: "2023",
-    links: { paper: "https://journal.computationalcommunication.org/article/view/4776" }
+    links: { paper: "https://journal.computationalcommunication.org/article/view/4776", code: "https://github.com/CivicTechLab/CMFD" }
   },
   {
-    title: "Authority-led conspiracy theories in China during the COVID-19 pandemic",
+    id: "pub-social-media-livestream",
+    title: "Social media live streaming as affective news in the anti-ELAB movement in Hong Kong",
+    authors: "Fang, K., & Cheng, C.",
+    venue: "Chinese Journal of Communication, 15(3), 401–414",
+    year: "2022",
+    links: { paper: "https://www.tandfonline.com/doi/abs/10.1080/17544750.2022.2083202" }
+  },
+  {
+    id: "pub-authority-led-conspiracy",
+    title: "Authority-led conspiracy theories in China during the COVID-19 pandemic: Exploring the thematic features and rhetoric strategies",
     authors: "Cheng, C. Y., Zhang, W. J., & Zhang, Q.",
-    venue: "Convergence, 28(4)",
+    venue: "Convergence, 28(4), 1172–1197",
     year: "2022",
     links: { paper: "https://journals.sagepub.com/doi/10.1177/13548565221102592" }
   },
@@ -164,6 +187,15 @@ const AWARD_DATA: AwardItem[] = [
   { title: "Second Undergraduate Scholarship", organization: "University of International Business and Economics", year: "2011 - 2014" },
 ];
 
+// To update the resume: replace this with a new Google Drive "Anyone with the link" share
+// URL for the PDF. No other code changes are needed.
+const RESUME_DRIVE_URL = "https://drive.google.com/file/d/1-io4yiF030QlUh1hl5B5KxnJm7N0KtiU/view?usp=sharing";
+
+const getGoogleDriveEmbedUrl = (shareUrl: string) => {
+  const fileId = shareUrl.match(/\/d\/([^/]+)/)?.[1] ?? '';
+  return `https://drive.google.com/file/d/${fileId}/preview`;
+};
+
 // --- Sub-Components ---
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenuOpen, setIsMobileMenuOpen }) => {
@@ -175,8 +207,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenu
     { id: 'service', label: 'Service', icon: <Award size={18} /> },
     { id: 'award', label: 'Awards', icon: <Award size={18} /> },
     { id: 'resume', label: 'Resume', icon: <FileText size={18} /> },
-    { id: 'blog', label: 'Blog', icon: <PenTool size={18} /> }, // Added Blog Item
-
   ];
 
   return (
@@ -199,7 +229,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isMobileMenu
           {/* Logo / Name Area (Desktop) */}
           <div className="hidden md:block mb-10 mt-4">
             <h1 className="text-2xl font-bold text-slate-900">Calvin Yixiang Cheng 程一祥</h1>
-            <p className="text-sm text-slate-500">DPhil @ Oxford Internet Institute</p>
           </div>
 
           {/* Navigation Links */}
@@ -257,16 +286,17 @@ const HomeSection = () => (
            />
         </div>
         <h2 className="text-2xl font-bold text-slate-900">Calvin Yixiang Cheng</h2>
-        <p className="text-blue-600 font-medium mb-4">DPhil in Social Data Science</p>
-        
+        <p className="text-blue-600 font-medium">Postdoctoral Research Fellow in Science Communication</p>
+        <p className="text-slate-500 text-sm mb-4">IKMZ, University of Zurich</p>
+
         <div className="w-full space-y-3 mb-2">
             <div className="flex items-center justify-center space-x-2 text-slate-600 text-sm">
                 <Mail size={16} />
-                <span>calvin.cheng [at] oii.ox.ac.uk</span>
+                <span>calvinchengyx0930 [at] gmail.com</span>
             </div>
             <div className="flex items-center justify-center space-x-2 text-slate-600 text-sm">
                  <span className="font-semibold">Location:</span>
-                 <span>Oxford, United Kingdom</span>
+                 <span>Zurich, Switzerland</span>
             </div>
         </div>
       </div>
@@ -279,18 +309,14 @@ const HomeSection = () => (
         <h3 className="text-xl font-bold text-slate-900 border-l-4 border-blue-600 pl-3 mb-4">About Me</h3>
         <div className="prose prose-slate max-w-none text-slate-700">
           <p className="mb-4">
-            Hello! Welcome to my personal website. My name's Calvin Yixiang Cheng, and I am a DPhil candidate in Social Data Science at the Oxford Internet Institute, University of Oxford. My expertise is in computational social science, where my academic passion is to achieve a more informed public by understanding how artifical intelligience and digital technologies shape people's belief through narratives. 
+            Hey, my name's Calvin Yixiang Cheng — welcome to my personal website. I am a Postdoctoral Research Fellow in Science Communication at IKMZ, University of Zurich. My expertise is in computational social science, where my research vision is to achieve a more informed public by understanding how artificial intelligence (AI) and digital technologies shape people's beliefs through online narratives.
           </p>
           <p className="mb-4">
-            My doctoral thesis, titled <em>"The Persistence of Online Conspiracy Theories: Sociopsychological Drivers, Language Mutations, and Cross-Platform Narratives,"</em> investigates 
-            how misleading narratives persist, mutate and spread across media platforms and language barriers. I employ a wide range of computational methods including Natural Language Processing (NLP), Large Language Models (LLMs), machine learning, statistical modelling, and experiments.
+             My research interests broadly lie at the intersection of AI, science communication, and narrative persuasion. Specifically, I am currently working on the following topics in the domain of misinformation research: (1) conspiracy persistence - I investigate how misleading narratives persist, mutate, and spread across media platforms and languages. My latest publication, <em>"Language Mutations and the Persistence of COVID-19 Conspiracy Theories on Social Media"</em> (Computers in Human Behavior, 2026), traces how conspiratorial narratives about COVID-19 evolved linguistically as they spread. (2) strategic narrative persuasion - I examine how we can apply persuasion strategies to correct misbeliefs in science; (3) AI-assisted science communication - I explore how AI can be used to enhance the effectiveness of science communication and public engagement.
           </p>
           <p>
-             My research interests broadly lie at the intersection of AI, political communication, and narrative studies. I am currently working on three strands of projects: (1) Strategic narrative analysis and persuasion - how AI shape the classic strategic narrative theory and impact people's political beliefs and public policy; (2) AI-assisted text analysis - evaluate the methodological validity of using AI in deductive annotation tasks in social science research; (3) AI's impact on cognition - how AI shapes the cognitive capabilities of human in communication, particulalry on the cognitive offloading. 
+              I completed my DPhil in Social Data Science at the Oxford Internet Institute, University of Oxford. Before that, I finished my MPhil in Computational Communication from the Chinese University of Hong Kong, and my BA in International Communication, University of International Business and Economic Relations. 
           </p>
-          <p>   
-            <span className="text-blue-600 font-semibold"> I am currently on the job market and actively seeking research opportunities and industry positions in technology product management roles.  Please feel free to get in touch with any inquiries or collaboration ideas if there is mutual interest.</span>
-          </p>       
         </div>
       </section>
 
@@ -312,153 +338,48 @@ const HomeSection = () => (
   </div>
 );
 
-// --- NEW COMPONENT: BLOG SECTION ---
-const BlogSection = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [selectedPost, setSelectedPost] = useState<string | null>(null);
-  const [content, setContent] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // 1. Fetch the Index of Posts
-  useEffect(() => {
-    fetch('/blog/index.json')
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to load blog index");
-        return res.json();
-      })
-      .then(data => {
-        setPosts(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setError("Could not load blog posts. Please ensure /public/blog/index.json exists.");
-        setLoading(false);
-      });
-  }, []);
-
-  // 2. Fetch specific article content
-  const handleReadPost = (filepath: string) => {
-    setLoading(true);
-    fetch(`/blog/${filepath}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to load post");
-        return res.text();
-      })
-      .then(text => {
-        setContent(text);
-        setSelectedPost(filepath);
-        setLoading(false);
-        window.scrollTo(0, 0); // Scroll to top of page
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  };
-
-  if (loading && posts.length === 0) return <div className="p-10 text-center text-slate-500">Loading articles...</div>;
-
-  // View 1: Single Post Reading Mode
-  if (selectedPost) {
-    return (
-      <div className="max-w-4xl mx-auto animate-fade-in">
-        <button 
-          onClick={() => { setSelectedPost(null); setContent(''); }}
-          className="flex items-center text-sm text-blue-600 hover:text-blue-800 mb-6 transition-colors font-medium"
-        >
-          <ArrowLeft size={16} className="mr-2" /> Back to Articles
-        </button>
-        
-        {loading ? (
-           <div className="p-10 text-center text-slate-500">Loading post content...</div>
-        ) : (
-          <div className="bg-white p-8 md:p-12 rounded-2xl border border-slate-200 shadow-sm">
-             <article className="prose prose-slate max-w-none prose-headings:font-bold prose-h1:text-3xl prose-a:text-blue-600 prose-code:text-blue-600 prose-pre:bg-slate-100 prose-pre:text-slate-800">
-               {/* Use ReactMarkdown to render the content */}
-               {/* Locally: you can add remarkPlugins={[remarkGfm]} to ReactMarkdown for tables support */}
-               <ReactMarkdown>{content}</ReactMarkdown>
-             </article>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // View 2: List of Posts
-  return (
-    <div className="max-w-4xl mx-auto animate-fade-in">
-      <h2 className="text-3xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">Blog & Insights</h2>
-      
-      {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6 border border-red-200">
-          {error}
-        </div>
-      )}
-
-      <div className="grid gap-6">
-        {posts.map((post) => (
-          <div 
-            key={post.id} 
-            className="group bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer"
-            onClick={() => handleReadPost(post.filepath)}
-          >
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                {post.title}
-              </h3>
-              <span className="flex items-center text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">
-                <Calendar size={12} className="mr-1"/> {post.date}
-              </span>
-            </div>
-            <p className="text-slate-600 leading-relaxed mb-4">{post.summary}</p>
-            <div className="flex items-center text-blue-600 text-sm font-medium">
-              Read Article <ArrowLeft size={14} className="ml-1 rotate-180" />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const ResearchSection = () => (
   <div className="max-w-4xl mx-auto animate-fade-in">
     <h2 className="text-3xl font-bold text-slate-900 mb-8 pb-4 border-b border-slate-200">Selected Publications</h2>
-    <div className="space-y-8">
-      {PUBLICATIONS_DATA.map((pub, idx) => (
-        <div key={idx} className="flex flex-col md:flex-row gap-4">
-          
-          <div className="flex-1">
+
+    {/* Vertical timeline: a dot + year on the left marks each publication, full details run down the right */}
+    <div className="relative">
+      <div className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-slate-200" aria-hidden="true" />
+
+      <div className="space-y-10">
+        {PUBLICATIONS_DATA.map((pub) => (
+          <div key={pub.id} id={pub.id} className="relative pl-10 scroll-mt-24">
+            <span className="absolute left-0 top-1 h-4 w-4 rounded-full border-2 border-white bg-blue-600 shadow ring-1 ring-slate-200" />
+
+            <div className="text-xs font-mono font-semibold text-blue-600 mb-1">{pub.year}</div>
             <h3 className="text-lg font-bold text-slate-900 mb-2">{pub.title}</h3>
-            <p className="text-slate-700 mb-1" dangerouslySetInnerHTML={{ 
-              __html: pub.authors.replace("Cheng, C.", "<strong>Cheng, C.</strong>").replace("Cheng, C. Y.", "<strong>Cheng, C. Y.</strong>") 
+            <p className="text-slate-700 mb-1" dangerouslySetInnerHTML={{
+              __html: pub.authors.replace(/Cheng, C\.(?: Y\.)?/, (match) => `<strong>${match}</strong>`)
             }} />
             <p className="text-slate-500 text-sm italic mb-3">
-              {pub.venue}, {pub.year} {pub.status && <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded text-xs ml-2 not-italic font-medium">{pub.status}</span>}
+              {pub.venue} {pub.status && <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded text-xs ml-2 not-italic font-medium">{pub.status}</span>}
             </p>
-            
+
             <div className="flex flex-wrap gap-3">
               {pub.links.paper && (
-                <a href={pub.links.paper} className="inline-flex items-center space-x-1 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors">
+                <a href={pub.links.paper} target="_blank" rel="noreferrer" className="inline-flex items-center space-x-1 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors">
                   <FileText size={14} /> <span>Paper</span>
                 </a>
               )}
               {pub.links.code && (
-                <a href={pub.links.code} className="inline-flex items-center space-x-1 text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-full hover:bg-slate-200 transition-colors">
+                <a href={pub.links.code} target="_blank" rel="noreferrer" className="inline-flex items-center space-x-1 text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-full hover:bg-slate-200 transition-colors">
                   <Code size={14} /> <span>Code</span>
                 </a>
               )}
               {pub.links.video && (
-                <a href={pub.links.video} className="inline-flex items-center space-x-1 text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full hover:bg-red-100 transition-colors">
+                <a href={pub.links.video} target="_blank" rel="noreferrer" className="inline-flex items-center space-x-1 text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full hover:bg-red-100 transition-colors">
                   <Video size={14} /> <span>Video</span>
                 </a>
               )}
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 );
@@ -652,479 +573,31 @@ const AwardSection = () => (
 );
 
 const ResumeSection = () => {
-  const [cvType, setCvType] = useState<'academic' | 'professional'>('academic');
+  const embedUrl = getGoogleDriveEmbedUrl(RESUME_DRIVE_URL);
 
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-slate-200 gap-4">
         <h2 className="text-3xl font-bold text-slate-900">Resume / CV</h2>
-        
-        <div className="flex items-center gap-4">
-            {/* CV Type Toggle */}
-            <div className="flex items-center bg-slate-100 rounded-lg p-1">
-              <button 
-                onClick={() => setCvType('academic')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  cvType === 'academic' 
-                    ? 'bg-white text-slate-900 shadow-sm' 
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Academic
-              </button>
-              <button 
-                onClick={() => setCvType('professional')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  cvType === 'professional' 
-                    ? 'bg-white text-slate-900 shadow-sm' 
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Professional
-              </button>
-            </div>
-            
-            <button className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm font-medium">
-                <Download size={16} /> PDF
-            </button>
-        </div>
+
+        <a
+          href={RESUME_DRIVE_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm font-medium"
+        >
+          <Download size={16} /> Open in Google Drive
+        </a>
       </div>
-      
-      {/* Resume Preview Paper Effect */}
-      <div className="bg-white p-8 md:p-12 shadow-md border border-slate-200 min-h-[800px] mx-auto max-w-[850px] animate-fade-in text-slate-900">
-        
-        {cvType === 'academic' ? (
-        /* --- ACADEMIC CV CONTENT --- */
-        <div className="text-sm leading-relaxed">
-            {/* Header */}
-            <div className="text-center mb-8">
-                    <h1 className="text-2xl font-bold uppercase tracking-wider mb-2">Calvin Yixiang Cheng</h1>
-                    <div className="text-slate-700">
-                        calvin.cheng@oii.ox.ac.uk<br/>
-                        Oxford, United Kingdom
-                    </div>
-                </div>
 
-                {/* Education */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Education</h3>
-                    
-                    <div className="mb-4">
-                        <div className="flex justify-between font-bold">
-                            <span>University of Oxford</span>
-                            <span>2021 - Present</span>
-                        </div>
-                        <div className="italic">DPhil in Social Data Science, Oxford Internet Institute</div>
-                        <div className="ml-4 text-slate-700 text-xs mt-1 space-y-0.5">
-                            <p>Thesis (expected viva in Dec 2025): The Persistence of Online Conspiracy Theories: Sociopsychological Drivers, Language Mutations, and Cross-Platform Narratives</p>
-                            <p>Supervisor: Scott A. Hale; Viva Assessors: Ralph Schroeder, Chico Camargo</p>
-                            <p>Training: Python for Data Science, Statistics, Natural Language Processing, Machine Learning</p>
-                        </div>
-                    </div>
-
-                    <div className="mb-4">
-                        <div className="flex justify-between font-bold">
-                            <span>Chinese University of Hong Kong</span>
-                            <span>2019 - 2021</span>
-                        </div>
-                        <div className="italic">MPhil in Communication, School of Journalism and Communication</div>
-                        <div className="ml-4 text-slate-700 text-xs mt-1 space-y-0.5">
-                            <p>Thesis: Exploring the Survival of Conspiracy Theories on Social Media in the Infodemic Age</p>
-                            <p>Supervisor: Hai Liang; Committee: Francis Lee (Chair), Weiyu Zhang, Hsuan-ting Chen</p>
-                            <p>Training: Qualitative Methods, Discourse Analysis, Applied/Advanced Statistics with R, Computational Text Analysis</p>
-                        </div>
-                    </div>
-
-                    <div className="mb-4">
-                        <div className="flex justify-between font-bold">
-                            <span>University of Hong Kong</span>
-                            <span>2015 - 2016</span>
-                        </div>
-                        <div className="italic">Master of Journalism, Journalism and Media Study Center</div>
-                        <div className="ml-4 text-slate-700 text-xs mt-1">
-                             <p>Training: R in Digital Analytics, Data Journalism, Media Law and Ethics, Research Methods</p>
-                        </div>
-                    </div>
-
-                    <div className="mb-4">
-                        <div className="flex justify-between font-bold">
-                            <span>University of International Business and Economics</span>
-                            <span>2011 - 2015</span>
-                        </div>
-                        <div className="italic">Bachelor of Arts (School of International Studies) & Bachelor of Law (School of International Relations)</div>
-                        <div className="ml-4 text-slate-700 text-xs mt-1">
-                             <p>Training: Media Studies, Linguistics, Intl Political Economy, Micro/Macro Economy, Political Science</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Research Experience */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Research Experience</h3>
-                    
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Research Assistant at the Oxford Internet Institute</span>
-                            <span>May 2025 - Present</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Project: Tracking Influence of LLM-Generated Content on Digital Platforms. Working with Dr. Mohsen Mosleh on cross-platform social media data collection and narrative detection with LLMs.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Research Lead at the Oxford Computational Political Science Group</span>
-                            <span>Jan 2025 - Present</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Project: Measuring the Moral Contagion Effect. Leading a five-member research team to address gaps in moral contagion theory related to measurement bias and causal inference. Supervising two doctoral and two master students.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Doctoral Researcher at the Oxford Internet Institute & Alan Turing Institute</span>
-                            <span>Sep 2021 - Present</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Project: Effective discovery, tracking, and response to misinformation. Working with Dr. Scott Hale on multilingual misinformation diffusion and language mutations using LLMs-assisted approaches.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Researcher at the Oxford Internet Institute, AI, Government and Policy</span>
-                            <span>Sep 2022 - Nov 2023</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Project: Contemporary conspiracy narratives on social media. Utilizing survival analysis and computational text analysis to investigate the persistence of online conspiracy narratives.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Research Assistant at the Civic Tech Lab, National University of Singapore</span>
-                            <span>Sep 2021 - Mar 2023</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Project: Chinese Moral Foundation Dictionary. Co-led a five-member research team with Prof. Weiyu Zhang to develop a Chinese Moral Foundation Dictionary.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Research Assistant at Chinese University of Hong Kong</span>
-                            <span>Sep 2019 - July 2021</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4 space-y-1">
-                            <p>Project I: COVID-19 Misinformation and Political Asymmetry. Worked with Dr. Hai Liang on misinformation in US 2020 election.</p>
-                            <p>Project II: Livestreaming Journalism in Social Movements. Worked with Dr. Kecheng Fang on livestreaming journalism in 2019 HK protests.</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Teaching Experience */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Teaching Experience</h3>
-                    
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Graduate Lecturer at Brawijaya University</span>
-                            <span>Sep - Dec 2024</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Course: Computational Social Science in Political Communication with Python. Designed and taught a course featuring hands-on projects on sentiment analysis, embeddings, and LLMs.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Graduate Teaching Assistant at Oxford Internet Institute</span>
-                            <span>2023 - 2024</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Course: Fundamental Social Data Science. Assisted lecturers in guiding students through critical assessments of research methods.
-                        </div>
-                    </div>
-
-                     <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Undergraduate Tutor at University of Oxford</span>
-                            <span>2022 - Present</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Courses: Computational Propaganda (St Catherine's), Critical Media Studies, AI & Ethics, Mass Media & Governance, AI & Society. Designed syllabi incorporating theoretical foundations and research design.
-                        </div>
-                    </div>
-
-                     <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Undergraduate Teaching Assistant at Chinese University of Hong Kong</span>
-                            <span>2019 - 2020</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Courses: Mass Communication Theories, Computational Communication with R. Assisted with R programming (quanteda, tidyverse, sna).
-                        </div>
-                    </div>
-                </div>
-
-                {/* Professional Experience */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Professional Experience</h3>
-                    
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Deputy Editor-in-Chief, DT Caijing, China Business Network</span>
-                            <span>Shanghai, 2016 - 2019</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                             Editor of "Data Scientists" column. Led a research team at CBNData for data-driven consulting and investigative journalism support.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Journalist, Deep Echo Media</span>
-                            <span>Beijing, May 2018 - Apr 2019</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                            Covered feature stories on public tech companies (Alibaba, Tencent, ByteDance), focusing on data analysis of financial reports and strategy.
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Project Manager, Journalism and Media Study Center (HKU)</span>
-                            <span>Hong Kong, Aug - Nov 2016</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                           Analyzed social media campaign strategies of politicians in the 2015 HK Legislative Council election.
-                        </div>
-                    </div>
-
-                     <div className="mb-3">
-                        <div className="flex justify-between font-bold">
-                            <span>Data Journalist Intern, Initium Media</span>
-                            <span>Hong Kong, May - Aug 2016</span>
-                        </div>
-                        <div className="text-xs text-slate-700 ml-4">
-                           Crafted data-driven stories using sentiment/network analysis. Developed infographics with R Shiny and HTML.
-                        </div>
-                    </div>
-                </div>
-
-                {/* Peer-Reviewed Research */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Peer-Reviewed Research</h3>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-2 text-slate-800">
-                        <li><strong>Cheng, C.</strong>, & Hale, S. A., (2026) Proceedings of the International AAAI Conference on Web and Social Media [forthcoming] Beyond English: Evaluating Automated Measurement of Moral Framing in Non-English Discourse with a Chinese Case Study.</li>
-                        <li>Quelle, D., <strong>Cheng, C. Y.</strong>, Bovet, A., & Hale, S. A. (2025). Lost in translation: using global fact-checks to measure multilingual misinformation prevalence, spread, and evolution. <em>EPJ Data Science</em>, 14(1), 22.</li>
-                        <li>Liu, D., Yang, S., <strong>Cheng, C. Y.</strong>, Cai, L., & Su, J. (2024). Online Health Information Seeking, eHealth Literacy, and Health Behaviors Among Chinese Internet Users. <em>JMIR</em>, 26, e54135.</li>
-                        <li>Zeng, J., & <strong>Cheng, C. Y.</strong> (2024). Diasporic citizen journalism: Exploring the discussion on the 2022 blank paper protests in the Chinese Twitter community. <em>Journalism</em> 0(0).</li>
-                        <li><strong>Cheng, C. Y.</strong>, & Zhang, W. (2023). C-MFD 2.0: Developing a Chinese Moral Foundation Dictionary. <em>Computational Communication Research</em>, 5(2).</li>
-                        <li>Fang, K., & <strong>Cheng C.</strong> (2022) Social media live streaming as affective news in the anti-ELAB movement in Hong Kong. <em>Chinese Journal of Communication</em>, 15:3, 401-414.</li>
-                        <li><strong>Cheng, C. Y.</strong>, Zhang, W. J., & Zhang, Q. (2022). Authority-led conspiracy theories in China during the COVID-19 pandemic Exploring the thematic features and rhetoric strategies. <em>Convergence</em>, 28(4),1172-1197.</li>
-                    </ul>
-                </div>
-
-                {/* Ongoing Research */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Ongoing Research</h3>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-2 text-slate-800">
-                        <li><strong>Cheng C.</strong>, Hale, S., Liang, H. & Li, L., (under review) The Longevity of Conspiracy Theories on Social Media: Political Ideology, Monological Belief and Moral Contagion.</li>
-                        <li><strong>Cheng C.</strong>, Quelle, D., & Hale, S., (under review) Evolving Words, Enduring Beliefs: Language Mutations and the Persistence of Conspiracy Theories Online.</li>
-                        <li><strong>Cheng C.</strong>, Mosleh, M., Hale, S., & Rand, D (Work in Progress) Convergent or Divergent? Mapping Conspiracy Narratives across Social Media Platforms.</li>
-                        <li><strong>Cheng C.</strong>, Rice, J., Bozkurt., B., Vanderchmitt, L., & Ratnam, R., (Work in Progress) Moral Contagion on Social Media: Measurement Bias, Longitudinal Effect and Causal Inference.</li>
-                    </ul>
-                </div>
-
-                {/* Conference Presentations */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Conference Presentations & Talks</h3>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-2 text-slate-800">
-                        <li><strong>6th CODI Workshop (2025):</strong> Developing an Automated Conspiracy Narrative Pipeline.</li>
-                        <li><strong>75th ICA (2025):</strong> Evaluating Automated Measurement of Moral Foundations in Non-English Discourse; Research Escalator: Rumours and Morality.</li>
-                        <li><strong>10th IC²S² (2024):</strong> The Persistence of Conspiracy Theories on Social Media; Mutations of Multilingual Misinformation on WhatsApp.</li>
-                        <li><strong>CENS Workshop (2023):</strong> Conspiracy and Populism in the Digital Age (Invited Talk).</li>
-                        <li><strong>Oxford LLMs Workshop (2023):</strong> LLMs-assisted human value measurements.</li>
-                        <li><strong>9th IC²S² (2023):</strong> Investigating Multilingual Misinformation & Its Evolution.</li>
-                        <li><strong>105th AEJMC (2022):</strong> Understanding the survival of conspiracy theories on social media.</li>
-                        <li><strong>72nd ICA (2022):</strong> Are Moral Foundations Universal?</li>
-                        <li><strong>4th SICSS (2021):</strong> Survival of Conspiracy Narratives Online.</li>
-                        <li><strong>104th AEJMC (2021):</strong> Conspiracy about COVID-19 in China: Authority's Role on Weibo.</li>
-                    </ul>
-                </div>
-
-                {/* Honours & Grants */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Honours & Research Grants</h3>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-800">
-                        <li>Great Britain China Educational Trust Student Award, £2,000 (2024-2025)</li>
-                        <li>Stanford House Tutor Research Grant, £225 (2024-2025)</li>
-                        <li>Alan Turing Institute & DSO National Laboratories Fund (2022-2024)</li>
-                        <li>St Cross College Research Grant, Oxford University, £1200 (2021-2024)</li>
-                        <li>Dieter Schwarz Foundation Fellowship on AI Government and Policy (£22,000) (2021-2022)</li>
-                        <li>Simon Li Scholarship, China Oxford Scholarship Fund, £5,000 (2021-2022)</li>
-                        <li>Postgraduate Scholarship, Chinese University of Hong Kong (2019-2021)</li>
-                    </ul>
-                </div>
-
-                {/* Service */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Academic Service</h3>
-                    <div className="text-xs text-slate-700">
-                        <p className="mb-2"><strong>Reviewer for Conferences:</strong> International Communication Association (ICA), International Conference on Computational Social Science (IC²S²), AEJMC, ICWSM.</p>
-                        <p><strong>Reviewer for Journals:</strong> Journal of Information Technology & Politics, Nature's Humanities and Social Science Communication, Convergence, Chinese Journal of Communication.</p>
-                    </div>
-                </div>
-
-                {/* Skills */}
-                <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Skills</h3>
-                    <div className="text-xs text-slate-700 grid grid-cols-1 gap-1">
-                        <div><strong>Languages:</strong> English & Mandarin</div>
-                        <div><strong>Coding:</strong> Python, R, SPSS, Gephi, HTML, CSS, Markdown, LaTeX</div>
-                        <div><strong>Key Libraries:</strong> SpaCy, NLTK, Pandas, Numpy, Quanteda, dplyr, tidyr</div>
-                        <div><strong>Platforms:</strong> VSCode, RStudio, Huggingface, Git, Google Console, Linux Server</div>
-                    </div>
-                </div>
-
-                 {/* References */}
-                 <div className="mb-6">
-                    <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">References</h3>
-                    <div className="text-xs text-slate-700">
-                        <p><strong>Prof Scott A. Hale</strong>, Oxford Internet Institute: scott.hale@oii.ox.ac.uk</p>
-                        <p><strong>Prof Mohsen Mosleh</strong>, Oxford Internet Institute: mohsen.mosleh@oii.ox.ac.uk</p>
-                        <p><strong>Prof Ralph Schroeder</strong>, Oxford Internet Institute: ralph.schroeder@oii.ox.ac.uk</p>
-                    </div>
-                </div>
-            </div>
-        ) : (
-        /* --- PROFESSIONAL CV CONTENT --- */
-        <div className="text-sm leading-relaxed">
-            {/* Header */}
-            <div className="text-center mb-8">
-                <h1 className="text-2xl font-bold uppercase tracking-wider mb-2">Calvin Yixiang Cheng</h1>
-                <div className="text-slate-700">
-                    calvin.cheng@oii.ox.ac.uk<br/>
-                    Oxford, United Kingdom
-                </div>
-            </div>
-
-            {/* About Me */}
-            <div className="mb-6">
-                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">About Me</h3>
-                <div className="bg-yellow-50 border border-slate-200 p-4 rounded text-xs text-slate-800">
-                    I have a PhD in social data science from Oxford University with 7+ years research and working experience in data science, product management, and content strategy. I have strong technical expertise in natural language processing and applied data science (AI). I'm also a collaborative team player, effective communicator, and empathetic people person.
-                </div>
-            </div>
-
-            {/* Experience */}
-            <div className="mb-6">
-                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Experience</h3>
-                
-                <div className="mb-4">
-                    <div className="flex justify-between font-bold">
-                        <span>University of Oxford</span>
-                        <span>Oxford, UK</span>
-                    </div>
-                    <div className="italic text-xs mb-1">PhD Researcher and Data Science Teaching Assistant</div>
-                    <div className="text-xs text-slate-500 mb-2">May 2021 - PRESENT</div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
-                        <li>Led NLP-driven research projects on understanding misinformation diffusion on 6+ platforms, resulting in 3+ peer reviewed publications in top-ranked journals and proceedings, including EPJ Data Science, ICWSM, and Journalism.</li>
-                        <li>Built automated narrative-detection pipelines processing 5 million posts and trained multilingual language models for disguised misinformation detection. Presented in 5+ top academic conferences including EMNLP, ICA and IC²S².</li>
-                        <li>Designed LLM-assisted text analysis methods to track and study social contagion and user engagements on social media, presented at top political science conferences such as Political Study Association.</li>
-                    </ul>
-                </div>
-
-                <div className="mb-4">
-                    <div className="flex justify-between font-bold">
-                        <span>China Business Network Co., Ltd</span>
-                        <span>Shanghai, China</span>
-                    </div>
-                    <div className="italic text-xs mb-1">Senior Product Manager</div>
-                    <div className="text-xs text-slate-500 mb-2">2016 - 2019</div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
-                        <li>Created and scaled "Data Hero" content product from concept to 30+ feature stories profiling leading data scientists at Alibaba, Tencent, Baidu, and ByteDance, reaching 100K+ monthly readers focused on applied data science in business.</li>
-                        <li>Led 3-person team developing "One KM from Tube Station" site-selection consulting product, delivering data-driven location analysis for 5+ retail clients in Beijing, Shanghai, and Shenzhen.</li>
-                        <li>Co-designed and organized 30+ bi-weekly workshops and one "Top 50 Data Scientists" summit (500+ attendees). Built a data science for business solution community from scratch to 2,500+ active members over two years.</li>
-                        <li>Co-developed an education product "Python for Data Science" course and recruited 500+ students.</li>
-                    </ul>
-                </div>
-
-                <div className="mb-4">
-                    <div className="flex justify-between font-bold">
-                        <span>Deep Echo Media Co., Ltd</span>
-                        <span>Beijing, China</span>
-                    </div>
-                    <div className="italic text-xs mb-1">Content Manager</div>
-                    <div className="text-xs text-slate-500 mb-2">May 2018 - April 2019</div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
-                        <li>Delivered 10+ analytical reports on publicly listed tech companies (e.g., Alibaba, Tencent, ByteDance), providing C-suite executives with data-driven insights on corporate strategy. Reports received 100K+ reviews on WeChat.</li>
-                    </ul>
-                </div>
-            </div>
-
-            {/* Education */}
-            <div className="mb-6">
-                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Education</h3>
-                
-                <div className="mb-4">
-                    <div className="flex justify-between">
-                        <span className="font-bold">University of Oxford, PhD Social Data Science</span>
-                        <span className="text-xs text-slate-500">October 2021 - May 2026</span>
-                    </div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700 mt-1">
-                        <li><strong>Thesis:</strong> The Persistence of Online Conspiracy: Sociopsychological Drivers, Language Mutations, & Pursuasive Narratives</li>
-                        <li><strong>Coursework:</strong> Python programming, inferential statistics, applied machine learning, natural language processing, AI ethics</li>
-                        <li><strong>Activity:</strong> Captain of Wolfson College Boat Club, competed in national (HoRR) and international regattas (Nanjing & Shenzhen)</li>
-                    </ul>
-                </div>
-
-                <div className="mb-4">
-                    <div className="flex justify-between">
-                        <span className="font-bold">Chinese University of Hong Kong, MPhil Communication</span>
-                        <span className="text-xs text-slate-500">Sep 2019 - July 2021</span>
-                    </div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700 mt-1">
-                        <li><strong>Thesis:</strong> The Survival of Conspiracy Theories on Social Media in the COVID-19 Pandemic</li>
-                        <li><strong>Courses:</strong> Statistics with R, Media Effect, Quantitative Research Methods, Qualitative Discourse Analysis, Research Design</li>
-                    </ul>
-                </div>
-
-                <div className="mb-4">
-                    <div className="flex justify-between">
-                        <span className="font-bold">University of Hong Kong, Master of Journalism</span>
-                        <span className="text-xs text-slate-500">Sep 2015 - Aug 2016</span>
-                    </div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700 mt-1">
-                        <li><strong>Courses:</strong> Data Journalism, Media Analytics, Financial Analysis, Media Ethics.</li>
-                        <li><strong>Intern:</strong> Produced 5+ data journalism stories at Initium Media Hong Kong using web scraping and D3.js–based visualizations.</li>
-                    </ul>
-                </div>
-
-                <div className="mb-4">
-                    <div className="font-bold">University of International Business and Economics</div>
-                    <div className="text-xs mb-1">BA International Studies (Major), LLB International Relations (minor)</div>
-                    <div className="text-xs text-slate-500 mb-1">Sep 2011 - Aug 2015</div>
-                    <ul className="list-disc list-outside ml-4 text-xs space-y-1 text-slate-700">
-                        <li><strong>Intern:</strong> Intern Content Manager in Tencent Technology Media Group, and China Central Television</li>
-                    </ul>
-                </div>
-            </div>
-
-            {/* Skills */}
-            <div className="mb-6">
-                <h3 className="font-bold border-b border-slate-400 mb-3 uppercase tracking-wide text-xs text-slate-500">Skills</h3>
-                <div className="text-xs text-slate-700 space-y-1">
-                    <div><strong>Language:</strong> English (proficient), Mandarin (native), Cantonese (beginner)</div>
-                    <div><strong>Programming:</strong> Python (pandas, SpaCy), R, HTML, Markdown, LaTeX, GitHub, VSCode, RStudio, Huggingface</div>
-                    <div><strong>Transferable:</strong> Project management, data analytics, user research, event coordination, teamwork, time management</div>
-                </div>
-            </div>
-        </div>
-        )}
+      {/* Embedded PDF Viewer (Google Drive) */}
+      <div className="bg-white shadow-md border border-slate-200 rounded-xl overflow-hidden mx-auto max-w-[850px]">
+        <iframe
+          src={embedUrl}
+          title="Calvin Yixiang Cheng - Resume / CV"
+          className="w-full h-[85vh] min-h-[800px]"
+          allow="autoplay"
+        />
       </div>
     </div>
   );
@@ -1144,7 +617,6 @@ const App = () => {
       case 'service': return <ServiceSection />;
       case 'award': return <AwardSection />;
       case 'resume': return <ResumeSection />;
-      case 'blog': return <BlogSection />; // Added Blog Section to switch
       default: return <HomeSection />;
     }
   };
