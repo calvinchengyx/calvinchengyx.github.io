@@ -292,7 +292,7 @@ const HomeSection = () => (
         <div className="w-full space-y-3 mb-2">
             <div className="flex items-center justify-center space-x-2 text-slate-600 text-sm">
                 <Mail size={16} />
-                <span>calvinchengyx0930 [at] gmail.com</span>
+                <span>yixiang.cheng [at] uzh.ch</span>
             </div>
             <div className="flex items-center justify-center space-x-2 text-slate-600 text-sm">
                  <span className="font-semibold">Location:</span>
